@@ -45,7 +45,7 @@ The range of values for the fields I need for analysis (fields of interest) beca
 `max_charge_power`:   **0.001** to **7.479** (36,599 records) 
 `energy_charged`:     **0.00** to **68.31** (36,599 records)
 `afterPaid`:          **True** OR **False** (36,599 records)
-`duration_hrs`:       **0.01** to **6.46**
+`duration_hrs`:       **0.01** to **6.46** (36,599 records)
 
 ## Data Validation 
 The quality of our cleaned data was evaluated based on the following metrics:
@@ -56,5 +56,5 @@ The quality of our cleaned data was evaluated based on the following metrics:
 **Range**: All data points fall under an appropriate range.
 **Type** All fields are of appropriate data types. 
 
-In conclusion, fields of interest were clean, accurate, and reliable.
+All in all, fields of interest were clean, accurate, and reliable.
 
