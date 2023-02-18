@@ -21,12 +21,12 @@ Neuman, Christopher, Andrew Meintz, and Myungsoo Jun. 2021. *Workplace Charging
 - COVID-19 Lockdown began March, 2020.
 
 ## Questions
-1. Which charging stations do employees spent the most/least time charging their EVs at?
-2. What is the average miles requested per the stations in (1) above? This could give us an insight into why employees spent more time at some stations and less at others.
-3. Does the average energy expended by those station has anything to do with the average miles requested or time spent charging at them? The correlation or lack thereof would point us towards exploring why some station might be faster than others at expending energy.
-4. Does a station’s floor level have anything to do with how fast/slow it expends energy? 
-5. How does the avg. miles requested and avg. energy charged per year compare pre & post COVID-19? This could give us insight into how NREL is returning to “normal,” or how its “new normal” looks like. 
-6. How does the avg. miles requested varies from when charging is free versus paid?
+1. At which top three charging stations do employees spend the most & least time charging their EVs?
+2. What is the avg. `miles_requested` per the stations in (1) above?
+3. Does the avg. `max_charge_power` expended by those station has anything to do with the avg. `miles_requested` and avg. `duration_hrs` spent charging?
+4. What is the relation between the avg. `max_charge_power`to the avg. `duration_hrs` spent charging per floor?
+5. How does the avg. `miles_requested` and avg. `energy_charged` per year compare pre and post COVID-19 lockdown? 
+6. How does the avg. `miles_requested` differ when charging is free versus when it is paid?
 
 ## Roadmap
 - **Data Preparation:** Loading dataset to Big Query, drafting project roadmap, fleshing out objectives & SOW, and setting priorities & deadlines, etc.
