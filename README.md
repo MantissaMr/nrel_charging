@@ -29,11 +29,11 @@ Neuman, Christopher, Andrew Meintz, and Myungsoo Jun. 2021. *Workplace Charging
 6. How does the avg. miles requested varies from when charging is free versus paid?
 
 ## Roadmap
-- Loading dataset to Big Query, drafting project roadmap, fleshing out objectives & SOW, and setting priorities & deadlines, etc
-- Deciding on exact fields (and needed field combinations) needed to answer our questions
-- Carefully clearing out nulls, validating the data, and implementing data security processes like hashing personal info (if not already done, for the latter
-- Attempting to answer our questions by figuring out which fields to plot against which in bettering how we convey insights, trying out simple aggregations, pivot tables, etc
-- Trying out simple vizzes: Tableau/ggplot in R/Google Sheets
-- Drafting notebook/repo/article/documentations
-- Compiling notebooks, creating pptx, archiving relevant files, and drafting the next project
+- **Data Preparation:** Loading dataset to Big Query, drafting project roadmap, fleshing out objectives & SOW, and setting priorities & deadlines, etc.
+- **Data Processing:** Deciding on exact fields (and needed field combinations) needed to answer our questions.
+- **Data Cleaning:** Carefully clearing out nulls, validating the data, and implementing data security processes like hashing personal info (if not already done).
+- **Data Analysis:** Attempting to answer our questions by figuring out which fields to plot against which in bettering how we convey insights, trying out simple aggregations, pivot tables, etc
+- **Viz Creations**: Trying out simple vizzes: Tableau/ggplot in R/Google Sheets
+- **Documentations**: Drafting notebook/repo/article/documentations
+- **Compilations**: Editing notebooks, creating pptx, archiving relevant files, and drafting the next project
 
