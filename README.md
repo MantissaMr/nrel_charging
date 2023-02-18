@@ -17,7 +17,7 @@ Neuman, Christopher, Andrew Meintz, and Myungsoo Jun. 2021. *Workplace Charging
 2. Illustrate any potential disparity between pre & post-COVID and Free & Paid charging habits.
 
 ## Assumptions
-- In the prefix “LVX” for each charging station, X indicates the floor level the charging station is positioned, with those starting with 0 and 1 denoting G*round Floor*.
+- In the prefix “LVX” for each charging station, X indicates the floor level the charging station is positioned, while those starting with 0 and 1 denotes *Ground Floor*.
 - COVID-19 Lockdown began March, 2020.
 
 ## Questions
