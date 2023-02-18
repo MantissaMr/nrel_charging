@@ -4,7 +4,7 @@
 
 This EV Charging data, gathered and maintained by the National Renewable Energy Lab (NREL), tracks nearly 400 vehicles over a 4-5 year period (2016-2021), and how EV drivers behave at a workplace charging station. The data is further enriched by having a field named "afterPaid," which is a boolean type that indicates whether a charging session is free or paid. All stations are free to use for the first 2.5 years of operation.
 
-**Please refer to this for full overview of the data:** 
+**Please find the full overview of the data here:** 
 Neuman, Christopher, Andrew Meintz, and Myungsoo Jun. 2021. *Workplace Charging Data Collection and Behavior*. Golden, CO: National Renewable Energy Laboratory. NREL/TP-5400-77515 https://www.nrel.gov/docs/fy22osti/77515.pdf 
 
 ## Acronyms
