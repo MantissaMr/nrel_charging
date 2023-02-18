@@ -16,9 +16,9 @@ Neuman, Christopher, Andrew Meintz, and Myungsoo Jun. 2021. *Workplace Charging
 1. Analyze how the tracked EVs interacted with the charging stations at the NREL workspace to help NREL improve its employee EV charging experience.
 2. Illustrate any potential disparity between pre & post-COVID and Free & Paid charging habits.
 
-## Assumptions
+## Assumption
 - In the prefix “LVX” for each charging station, X indicates the floor level the charging station is positioned, while those starting with 0 and 1 denotes *Ground Floor*.
-- COVID-19 Lockdown began March, 2020.
+- COVID-19 Lockdown began March 2020.
 
 ## Questions
 1. At which top three charging stations do employees spend the most & least time charging their EVs?
