@@ -1,7 +1,7 @@
 # Data Cleaning Report
 
 ## Introduction
-This report summarizes the data cleaning process for the NREL Charging Data from November 2016 to October 2021. Its purpose is to document the steps taken to clean the data and ensure its quality and accuracy. Please refer to [README.md](https://github.com/MantissaMr/nrel_charging/blob/c7c870ebf0d7ee3f36f57784d394258a6618908e/README.md) for more details about the data. 
+This report summarizes the data cleaning process for the NREL Charging Data from November 2016 to October 2021. Its purpose is to document the steps taken to clean the data and ensure its quality and accuracy. Please refer to [README.md](https://github.com/MantissaMr/nrel_charging/blob/c7c870ebf0d7ee3f36f57784d394258a6618908e/README.md) for more details about the dataset and the project. Also, feel free to jump around (left topmost corner). 
 
 ## Data Profiling
 The sales data set contains 40,980 records and 16 columns. The columns include:
@@ -34,30 +34,194 @@ With SQL, the following actions were taken on the fields we need for analysis:
 - Trimmed rows containing negative and null values in `miles_requested`
 - Formed `duration_hrs` as [`termin_charge` - `start_charge`] 
 - Extracted `floor_level`from `station`
-- Ensured the data types of all fields are as appropriate
+- Extracted `year` from `termin_charge`
 
-My fields of interest became:
+Fields for analyes involving charging stations:
 
 | Field Name | Data Type |Range | Number of records |
 | -------- | -------- | -------- |-------- |
+`station` | STRING | **01A** to **LV32-18** |36,599 |
 |`start_charge` | DATETIME | **2016-11-03** to **2021-10-11** | 36,599 |    
 |`termin_charge` | DATETIME | **2016-11-03** to **2021-10-11** | 36,599 |
-`station` | STRING | **01A** to **LV32-18** |36,599 |
 |`floor_level` | STRING |**Ground Floor** to **Level 3**| 36,599 |
 |`duration_hrs` | FLOAT | **0.01** to **6.46** | 36,599 |
 |`miles_requested` | INTEGER | **1** to **300** | 36,599 | 
 |`max_charge_power` | FLOAT|  **0.001** to **7.479** | 36,599 | 
 |`energy_charged` | FLOAT | **0.00** to **68.31** | 36,599 |
-|`afterPaid` | BOOLEAN | **True** OR **False** | 36,599 |
+
+For analyses involving pre/post COVID-19:
+| Field Name | Data Type |Range | Number of records |
+| -------- | -------- | -------- |-------- |
+|`year`| YEAR| |**2016** to **2021**|    6|
+| `energy_charged` | INTEGER | **8** to **13** |  6 |
+| `miles_requested` | INTEGER | **43** to **75** |  6 |
+
+For analysis of Fre/Paid Charging:
+| Field Name | Data Type |Range | Number of records |
+| -------- | -------- | -------- |-------- |
+|`year`| YEAR| |**2016** to **2021**|    7|
+| `miles_requested` | INTEGER | **43** to **75** |  7 |
+|`afterPaid` | BOOLEAN | **True** OR **False** | 7|
+
+## Data Grouping 
+The grouping of the dataset reflecting the above data cleaning actions is as follows: 
+
+- `duration_hrs` by `station` 
+``` sql
+WITH tidy_table1 AS 
+  (
+    SELECT      station,
+/*Casting strings to DATETIME so we can perform simple calculations later
+		when finding the average duration of charging time*/
+                CAST(start_charge AS DATETIME) start_charge,
+                CAST(termin_charge AS DATETIME) termin_charge
+
+    FROM `disco-order-yeah.nrel.charging_data`
+    WHERE start_charge != "NULL"
+          AND termin_charge != "NULL"
+          AND miles_requested IS NOT NULL
+			    AND miles_requested >= 0
+  )
+
+SELECT  station,
+				#converting duration to hours
+				ROUND (
+                AVG (
+                      EXTRACT(HOUR FROM (termin_charge - start_charge)) * 3600 +
+                      EXTRACT(MINUTE FROM (termin_charge - start_charge)) * 60 +
+                     EXTRACT(SECOND FROM (termin_charge - start_charge))
+                     )/3600
+              , 2) AS
+         duration_hrs  
+FROM     tidy_table1
+GROUP BY station
+ORDER BY station  
+LIMIT    200
+```
+
+- `miles_requested` by `station`
+``` sql
+SELECT  station,
+        #rounding the values in miles_requested
+        CAST(ROUND(AVG(miles_requested), 0) AS INT64) AS miles_requested
+FROM `disco-order-yeah.nrel.charging_data`
+WHERE start_charge != "NULL"
+          AND termin_charge != "NULL"
+          AND miles_requested IS NOT NULL 
+			    AND miles_requested >= 0
+GROUP BY station 
+ORDER BY station 
+LIMIT 200
+```
+
+- `max_charge_power` by `station`
+```sql 
+SELECT    station, ROUND (AVG (CAST (max_charge_power AS FLOAT64)), 2) AS max_charge_power
+FROM      `disco-order-yeah.nrel.charging_data`
+WHERE     start_charge != "NULL"
+          AND termin_charge != "NULL"		
+          AND miles_requested IS NOT NULL
+          AND miles_requested >= 0  
+GROUP BY  station
+ORDER BY  station 
+LIMIT     200
+```
+
+- `floor_level` by `station` 
+```sql
+SELECT DISTINCT station,
+CASE
+  WHEN LEFT(station, 3) = 'LV1' THEN 'Level 1'
+  WHEN LEFT(station, 3) = 'LV2' THEN 'Level 2'
+  WHEN LEFT (station, 3) = 'LV3' THEN 'Level 3'
+  ELSE 'Ground Floor'
+  END AS floor_level
+FROM `disco-order-yeah.nrel.charging_data`
+WHERE station != "LV31-08" #this station has null for all `termin_charge` and `start_charge` fields
+ORDER BY station
+LIMIT 200
+```
+
+- energy_charged by year 
+```sql 
+WITH tidy_table10 AS 
+  (
+    SELECT      CAST (energy_charged AS FLOAT64) energy_charged,
+                CAST(termin_charge AS DATETIME) termin_charge
+
+    FROM `disco-order-yeah.nrel.charging_data`
+    WHERE termin_charge != "NULL"
+          AND energy_charged IS NOT NULL
+					AND miles_requested IS NOT NULL
+          AND miles_requested >= 0
+  )
+
+SELECT  EXTRACT(YEAR FROM termin_charge) as year,
+        ROUND ((AVG (energy_charged)),0) as energy_charged
+FROM tidy_table10
+GROUP BY year
+ORDER BY year
+```
+
+- miles_requested by year 
+```sql 
+WITH tidy_table10 AS 
+  (
+    SELECT      miles_requested,
+                CAST(termin_charge AS DATETIME) termin_charge
+
+    FROM `disco-order-yeah.nrel.charging_data`
+    WHERE start_charge != "NULL"
+          AND termin_charge != "NULL"
+          AND miles_requested IS NOT NULL 
+			    AND miles_requested >= 0 
+  )
+
+SELECT  EXTRACT(YEAR FROM termin_charge) as year,
+        ROUND (AVG (miles_requested), 0) as miles_requested
+FROM tidy_table10
+GROUP BY year
+ORDER BY year
+```
+
+- miles_requested by afterPaid 
+```sql 
+WITH tidy_table10 AS 
+  (
+    SELECT      afterPaid,
+                miles_requested,
+                CAST(termin_charge AS DATETIME) termin_charge
+
+    FROM        `disco-order-yeah.nrel.charging_data`
+    WHERE       termin_charge != "NULL"
+								AND start_charge != "NULL"
+                AND miles_requested IS NOT NULL
+			          AND miles_requested >= 0
+  )
+
+SELECT  afterPaid,
+        EXTRACT (YEAR FROM termin_charge) as year,
+        CAST ((ROUND ((AVG (miles_requested)),0)) AS INTEGER) as miles_requested,
+FROM tidy_table10
+GROUP BY year, afterPaid
+ORDER BY year
+```
+
+After the above fields have been exported, and the following actions were taken:
+
+- Fields grouped by `station` are formed into the [tidy_station.xlsx](https://github.com/MantissaMr/nrel_charging/blob/main/tidy_station.xlsx).
+- Fields grouped by `year` for pre/post COVID analysis into the [covid_19.xlsx](https://github.com/MantissaMr/nrel_charging/blob/main/covid_19.xlsx).
+- Fields grouped by `year` for free/paid charging cost into the [freePaid](https://github.com/MantissaMr/nrel_charging/blob/main/freePaid.xlsx).
 
 ## Data Validation 
 The quality of our cleaned data was evaluated based on the following metrics:
 
-**Completeness**: The dataset was complete with no missing values.
-**Accuracy**: There were no misspelled values and outliers were removed. 
-**Consistency**: All inconsistent values were removed.
-**Range**: All data points fall under an appropriate range.
-**Type** All fields are of appropriate data types. 
+- **Completeness**: The dataset was complete with no missing values.
+- **Accuracy**: There were no misspelled values and outliers were removed. 
+- **Consistency**: All inconsistent values were removed.
+- **Range**: All data points fall under an appropriate range.
+- **Type** All fields are of appropriate data types. 
 
-All in all, fields of interest were clean, accurate, and reliable.
+
+All in all, all fields of interest were clean, accurate, and reliable.
 
