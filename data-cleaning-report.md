@@ -40,15 +40,15 @@ My fields of interest became:
 
 | Field Name | Data Type |Range | Number of records |
 | -------- | -------- | -------- |-------- |
-|`start_charge` | DATETIME | **2016-11-03** to **2021-10-11** | 36,599 records |    
-|`termin_charge` | DATETIME | **2016-11-03** to **2021-10-11** | 36,599 records |
-`station` | STRING | **01A** to **LV32-18** |36,599 records|
-|`floor_level` | STRING |**Ground Floor** to **Level 3**| 36,599 records |
-|`miles_requested` | INTEGER | **1** to **300** | 36,599 records | 
-|`max_charge_power` | FLOAT|  **0.001** to **7.479** | 36,599 records | 
-|`energy_charged` | FLOAT | **0.00** to **68.31** | 36,599 records |
-|`afterPaid` | BOOLEAN | **True** OR **False** | 36,599 records |
-|`duration_hrs` | FLOAT | **0.01** to **6.46** | 36,599 records |
+|`start_charge` | DATETIME | **2016-11-03** to **2021-10-11** | 36,599 |    
+|`termin_charge` | DATETIME | **2016-11-03** to **2021-10-11** | 36,599 |
+`station` | STRING | **01A** to **LV32-18** |36,599 |
+|`floor_level` | STRING |**Ground Floor** to **Level 3**| 36,599 |
+|`duration_hrs` | FLOAT | **0.01** to **6.46** | 36,599 |
+|`miles_requested` | INTEGER | **1** to **300** | 36,599 | 
+|`max_charge_power` | FLOAT|  **0.001** to **7.479** | 36,599 | 
+|`energy_charged` | FLOAT | **0.00** to **68.31** | 36,599 |
+|`afterPaid` | BOOLEAN | **True** OR **False** | 36,599 |
 
 ## Data Validation 
 The quality of our cleaned data was evaluated based on the following metrics:
