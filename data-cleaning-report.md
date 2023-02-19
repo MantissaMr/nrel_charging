@@ -26,7 +26,7 @@ The sales data set contains 40,980 records and 16 columns. The columns include:
 The [provided csv file](https://github.com/MantissaMr/nrel_charging/blob/231ba1a80ff1c47360c022072f1b192025f3ee23/dataSet_Oct2021.csv) was used to create a table in Big Query. While exploring, I found several columns with null values. Moreover, most of the columns, particularly those representing DATETIME, were actually type STRING. 
 
 ## Data Cleaning
-With SQL, the following steps were taken on the fields we need for analysis:
+With SQL, the following actions were taken on the fields we need for analysis:
 
 - Removed nulls in fields of interest
 - Casted `start_charge` and `termin_charge` as DATETIME 
