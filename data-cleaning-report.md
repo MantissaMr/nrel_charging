@@ -1,7 +1,7 @@
 # Data Cleaning Report
 
 ## Introduction
-This report summarizes the data cleaning process for the NREL Charging Data from November 2016 to October 2021. Its purpose is to document the steps taken to clean the data and ensure its quality and accuracy. Please refer to [README.md](https://github.com/MantissaMr/nrel_charging/blob/c7c870ebf0d7ee3f36f57784d394258a6618908e/README.md) for more details about the dataset and the project. Also, feel free to jump around (left topmost corner). 
+This report summarizes the data cleaning process for the NREL Charging Data from November 2016 to October 2021. Its purpose is to document the steps taken to clean the data and ensure its quality and accuracy. Please refer to [README.md](https://github.com/MantissaMr/nrel_charging/blob/c7c870ebf0d7ee3f36f57784d394258a6618908e/README.md) for more details about the dataset and the project. Also, feel free to jump around (top leftmost corner). 
 
 ## Data Profiling
 The sales data set contains 40,980 records and 16 columns. The columns include:
