@@ -36,16 +36,19 @@ With SQL, the following steps were taken on the fields we need for analysis:
 - Extracted `floor_level`from `station`
 - Ensured the data types of all fields are as appropriate
 
-The range of values for the fields I need for analysis (fields of interest) became:
-       
-`start_charge`:       **2016-11-03** to **2021-10-11**  (36,599 records)    
-`termin_charge`:      **2016-11-03** to **2021-10-11**  (36,599 records)
-`station`:            **01A** to **LV32-18** (36,606 records, discarding station **LV31-08** as it has null values for all `start_charge` and `termin_charge`)
-`miles_requested`:    **1** to **300** (36,599 records) 
-`max_charge_power`:   **0.001** to **7.479** (36,599 records) 
-`energy_charged`:     **0.00** to **68.31** (36,599 records)
-`afterPaid`:          **True** OR **False** (36,599 records)
-`duration_hrs`:       **0.01** to **6.46** (36,599 records)
+My fields of interest became:
+
+| Field Name | Data Type |Range | Number of records |
+| -------- | -------- | -------- |-------- |
+|`start_charge` | DATETIME | **2016-11-03** to **2021-10-11** | 36,599 records |    
+|`termin_charge` | DATETIME | **2016-11-03** to **2021-10-11** | 36,599 records |
+`station` | STRING | **01A** to **LV32-18** |36,599 records|
+|`floor_level` | STRING |**Ground Floor** to **Level 3**| 36,599 records |
+|`miles_requested` | INTEGER | **1** to **300** | 36,599 records | 
+|`max_charge_power` | FLOAT|  **0.001** to **7.479** | 36,599 records | 
+|`energy_charged` | FLOAT | **0.00** to **68.31** | 36,599 records |
+|`afterPaid` | BOOLEAN | **True** OR **False** | 36,599 records |
+|`duration_hrs` | FLOAT | **0.01** to **6.46** | 36,599 records |
 
 ## Data Validation 
 The quality of our cleaned data was evaluated based on the following metrics:
