@@ -21,7 +21,7 @@ Neuman, Christopher, Andrew Meintz, and Myungsoo Jun. 2021. *Workplace Charging
 - COVID-19 Lockdown began March 2020.
 
 ## Questions
-1. At which top three charging stations do employees spend the most & least time charging their EVs?
+1. Which top three charging `station` do employees spend the most & least time charging their EVs?
 2. What is the avg. `miles_requested` per the stations in (1) above?
 3. Does the avg. `max_charge_power` expended by those station has anything to do with the avg. `miles_requested` and avg. `duration_hrs` spent charging?
 4. What is the relation between the avg. `max_charge_power`to the avg. `duration_hrs` spent charging per floor?
@@ -29,11 +29,11 @@ Neuman, Christopher, Andrew Meintz, and Myungsoo Jun. 2021. *Workplace Charging
 6. How does the avg. `miles_requested` differ when charging is free versus when it is paid?
 
 ## Roadmap
-- **Data Preparation:** Loading dataset to Big Query, drafting project roadmap, fleshing out objectives & [SOW](https://docs.google.com/document/d/1ftbY2KYuM16lgtT44Cb91hMgL6ZyMxtGAAqlOJfgkJY/edit?usp=sharing&resourcekey=0-1lAFOlOFrlBkqXu3gsqiVA), and setting priorities & deadlines, etc.
-- **Data Processing:** Deciding on exact fields (and needed field combinations) needed to answer our questions.
-- **Data Cleaning:** Carefully clearing out nulls, validating the data, and implementing data security processes like hashing personal info (if not already done). Explore the [Data Cleaning Report](https://github.com/MantissaMr/nrel_charging/blob/fa5abfa8c947c7b94d45c17d5fe277bf458720ad/data-cleaning-report.md).
-- **Data Analysis:** Attempting to answer our questions by figuring out which fields to plot against which in bettering how we convey insights, trying out simple aggregations, pivot tables, etc
+- **Data Preparation:** Loading dataset to Big Query, drafting project roadmap, fleshing out SOW, etc.
+- **Data Processing:** Deciding on exact fields (and needed field combinations) needed to answer our questions
+- **Data Cleaning:** Carefully clearing out nulls, validating the data, and implementing data security processes like hashing personal info (if not already done)
+- **Data Analysis:** Attempting to answer our questions by figuring out which fields to plot against which in bettering how we convey insights, trying out simple aggregations, pivot tables, etc.
 - **Viz Creations**: Trying out simple vizzes, Tableau and ggplot lib. in R
-- **Documentations**: Drafting notebook/repo/article/documentations
+- **Documentations**: Drafting notebook/repo/article/documentations 
 - **Compilations**: Editing notebooks, creating pptx, archiving relevant files, and drafting the next project
 
