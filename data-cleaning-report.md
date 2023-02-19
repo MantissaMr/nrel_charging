@@ -4,7 +4,7 @@
 This report summarizes the data cleaning process for the NREL Charging Data from November 2016 to October 2021. Its purpose is to document the steps taken to clean the data and ensure its quality and accuracy. Please refer to [README.md](https://github.com/MantissaMr/nrel_charging/blob/c7c870ebf0d7ee3f36f57784d394258a6618908e/README.md) for more details about the dataset and the project. Also, feel free to jump around (top leftmost corner). 
 
 ## Data Profiling
-The sales data set contains 40,980 records and 16 columns. The columns include:
+The sales data set contains **40,980 records** and **16 columns**. The columns include:
 
 `driverId`
 `vehicle_model`
@@ -23,7 +23,7 @@ The sales data set contains 40,980 records and 16 columns. The columns include:
 `cost_for_session`
 `afterPaid`	
 
-The [provided csv file](https://github.com/MantissaMr/nrel_charging/blob/231ba1a80ff1c47360c022072f1b192025f3ee23/dataSet_Oct2021.csv) was used to create a table in Big Query. While exploring, I found several columns with null values. Moreover, most of the columns, particularly those representing DATETIME, were actually type STRING. 
+The [provided csv file](https://github.com/MantissaMr/nrel_charging/blob/main/Raw.csv) was used to create a table in Big Query. While exploring, I found several columns with null values. Moreover, most of the columns, particularly those representing DATETIME, were actually type STRING. 
 
 ## Data Cleaning
 With SQL, the following actions were taken on the fields we need for analysis:
@@ -52,14 +52,14 @@ Fields for analyes involving charging stations:
 For analyses involving pre/post COVID-19:
 | Field Name | Data Type |Range | Number of records |
 | -------- | -------- | -------- |-------- |
-|`year`| YEAR| |**2016** to **2021**|    6|
+|`year`| YEAR| **2016** to **2021**|    6|
 | `energy_charged` | INTEGER | **8** to **13** |  6 |
 | `miles_requested` | INTEGER | **43** to **75** |  6 |
 
 For analysis of Fre/Paid Charging:
 | Field Name | Data Type |Range | Number of records |
 | -------- | -------- | -------- |-------- |
-|`year`| YEAR| |**2016** to **2021**|    7|
+|`year`| YEAR| **2016** to **2021**|    7|
 | `miles_requested` | INTEGER | **43** to **75** |  7 |
 |`afterPaid` | BOOLEAN | **True** OR **False** | 7|
 
@@ -142,7 +142,7 @@ ORDER BY station
 LIMIT 200
 ```
 
-- energy_charged by year 
+- `energy_charged` by `year` 
 ```sql 
 WITH tidy_table10 AS 
   (
@@ -163,7 +163,7 @@ GROUP BY year
 ORDER BY year
 ```
 
-- miles_requested by year 
+- `miles_requested` by `year` 
 ```sql 
 WITH tidy_table10 AS 
   (
@@ -184,7 +184,7 @@ GROUP BY year
 ORDER BY year
 ```
 
-- miles_requested by afterPaid 
+- `miles_requested` by `afterPaid` 
 ```sql 
 WITH tidy_table10 AS 
   (
@@ -209,9 +209,9 @@ ORDER BY year
 
 After the above fields have been exported, and the following actions were taken:
 
-- Fields grouped by `station` are formed into the [tidy_station.xlsx](https://github.com/MantissaMr/nrel_charging/blob/main/tidy_station.xlsx).
-- Fields grouped by `year` for pre/post COVID analysis into the [covid_19.xlsx](https://github.com/MantissaMr/nrel_charging/blob/main/covid_19.xlsx).
-- Fields grouped by `year` for free/paid charging cost into the [freePaid](https://github.com/MantissaMr/nrel_charging/blob/main/freePaid.xlsx).
+- Fields grouped by `station` are formed into [tidy_station.xlsx](https://github.com/MantissaMr/nrel_charging/blob/main/tidy_station.xlsx).
+- Fields grouped by `year` for pre/post COVID analysis into [covid_19.xlsx](https://github.com/MantissaMr/nrel_charging/blob/main/covid_19.xlsx).
+- Fields grouped by `year` for free/paid charging cost into [freePaid.xlsx](https://github.com/MantissaMr/nrel_charging/blob/main/freePaid.xlsx).
 
 ## Data Validation 
 The quality of our cleaned data was evaluated based on the following metrics:
@@ -223,5 +223,5 @@ The quality of our cleaned data was evaluated based on the following metrics:
 - **Type** All fields are of appropriate data types. 
 
 
-All in all, all fields of interest were clean, accurate, and reliable.
+All in all, all fields of interest are clean, accurate, and reliable.
 
