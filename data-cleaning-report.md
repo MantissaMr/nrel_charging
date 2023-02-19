@@ -207,7 +207,30 @@ GROUP BY year, afterPaid
 ORDER BY year
 ```
 
-After the above fields have been exported, and the following actions were taken:
+- `energy_charged` by `afterPaid` 
+```sql 
+WITH tidy_table10 AS 
+  (
+    SELECT      afterPaid,
+                CAST (energy_charged AS FLOAT64) energy_charged,
+                CAST(termin_charge AS DATETIME) termin_charge
+
+    FROM `disco-order-yeah.nrel.charging_data`
+    WHERE start_charge != "NULL"
+          AND termin_charge != "NULL"
+          AND miles_requested IS NOT NULL 
+			    AND miles_requested >= 0 
+  )
+
+SELECT  afterPaid,
+        EXTRACT(YEAR FROM termin_charge) as year,
+        ROUND (AVG (energy_charged), 0) as energy_charged
+FROM tidy_table10
+GROUP BY year, afterPaid
+ORDER BY year
+```
+
+After the above fields have been exported, and the following actions were taken using Excel:
 
 - Fields grouped by `station` are formed into [tidy_station.csv](https://github.com/MantissaMr/nrel_charging/blob/main/tidy_station.csv).
 - Fields grouped by `year` for pre/post COVID analysis into [covid_19.csv](https://github.com/MantissaMr/nrel_charging/blob/main/covid_19.csv).
