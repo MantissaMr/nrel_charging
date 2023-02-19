@@ -209,9 +209,9 @@ ORDER BY year
 
 After the above fields have been exported, and the following actions were taken:
 
-- Fields grouped by `station` are formed into [tidy_station.xlsx](https://github.com/MantissaMr/nrel_charging/blob/main/tidy_station.xlsx).
-- Fields grouped by `year` for pre/post COVID analysis into [covid_19.xlsx](https://github.com/MantissaMr/nrel_charging/blob/main/covid_19.xlsx).
-- Fields grouped by `year` for free/paid charging cost into [freePaid.xlsx](https://github.com/MantissaMr/nrel_charging/blob/main/freePaid.xlsx).
+- Fields grouped by `station` are formed into [tidy_station.csv](https://github.com/MantissaMr/nrel_charging/blob/main/tidy_station.csv).
+- Fields grouped by `year` for pre/post COVID analysis into [covid_19.csv](https://github.com/MantissaMr/nrel_charging/blob/main/covid_19.csv).
+- Fields grouped by `year` for free/paid charging cost into [freePaid.csv](https://github.com/MantissaMr/nrel_charging/blob/main/freePaid.csv).
 
 ## Data Validation 
 The quality of our cleaned data was evaluated based on the following metrics:
