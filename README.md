@@ -22,7 +22,7 @@ Neuman, Christopher, Andrew Meintz, and Myungsoo Jun. 2021. *Workplace Charging
 
 ## Questions
 1. Which top three charging `station` do employees spend the most & least time charging their EVs?
-2. What is the avg. `miles_requested` per the stations in (1) above?
+2. Does the avg. `miles_requested` increases or decreases with charging `duration_hrs` in (1) above?
 3. Does the avg. `max_charge_power` expended by those station has anything to do with the avg. `miles_requested` and avg. `duration_hrs` spent charging?
 4. What is the relation between the avg. `max_charge_power`to the avg. `duration_hrs` spent charging per floor?
 5. How does the avg. `miles_requested` and avg. `energy_charged` per year compare pre and post COVID-19 lockdown? 
