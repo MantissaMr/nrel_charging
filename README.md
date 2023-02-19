@@ -33,7 +33,7 @@ Neuman, Christopher, Andrew Meintz, and Myungsoo Jun. 2021. *Workplace Charging
 - **Data Processing:** Deciding on exact fields (and needed field combinations) needed to answer our questions.
 - **Data Cleaning:** Carefully clearing out nulls, validating the data, and implementing data security processes like hashing personal info (if not already done). Explore the [Data Cleaning Report](https://github.com/MantissaMr/nrel_charging/blob/fa5abfa8c947c7b94d45c17d5fe277bf458720ad/data-cleaning-report.md).
 - **Data Analysis:** Attempting to answer our questions by figuring out which fields to plot against which in bettering how we convey insights, trying out simple aggregations, pivot tables, etc
-- **Viz Creations**: Trying out simple vizzes: Tableau and ggplot lib. in R
+- **Viz Creations**: Trying out simple vizzes, Tableau and ggplot lib. in R
 - **Documentations**: Drafting notebook/repo/article/documentations
 - **Compilations**: Editing notebooks, creating pptx, archiving relevant files, and drafting the next project
 
