@@ -7,7 +7,7 @@ This EV Charging data, gathered and maintained by the National Renewable Energy 
 **Please find the full overview of the data here:** 
 Neuman, Christopher, Andrew Meintz, and Myungsoo Jun. 2021. *Workplace Charging Data Collection and Behavior*. Golden, CO: National Renewable Energy Laboratory. NREL/TP-5400-77515 https://www.nrel.gov/docs/fy22osti/77515.pdf 
 
-## Acronyms
+## Abbreviations 
 
 - **NREL** ← National Renewable Energy Laboratory
 - **EV** ← Electric Vehicles
