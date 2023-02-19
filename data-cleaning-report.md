@@ -216,8 +216,8 @@ After the above fields have been exported, and the following actions were taken:
 ## Data Validation 
 The quality of our cleaned data was evaluated based on the following metrics:
 
-- **Completeness**: The dataset was complete with no missing values.
-- **Accuracy**: There were no misspelled values and outliers were removed. 
+- **Completeness**: The dataset is complete with no missing values.
+- **Accuracy**: There is no misspelled values and outliers were removed. 
 - **Consistency**: All inconsistent values were removed.
 - **Range**: All data points fall under an appropriate range.
 - **Type** All fields are of appropriate data types. 
