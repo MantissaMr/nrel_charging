@@ -14,7 +14,7 @@ Neuman, Christopher, Andrew Meintz, and Myungsoo Jun. 2021. *Workplace Charging
 - **US** ← United States
 
 ## Objectives
-1. Analyze how the tracked EVs interacted with the charging stations at the NREL workspace to help NREL improve its employee EV charging experience.
+1. Analyze how the tracked EVs interacted with the charging stations at the NREL workspace to help the organization improve its employee EV charging experience.
 2. Illustrate any potential disparity between pre & post-COVID and Free & Paid charging habits.
 
 ## Assumption
