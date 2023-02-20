@@ -56,7 +56,7 @@ For analyses involving pre/post COVID-19:
 | `energy_charged` | INTEGER | **8** to **13** |  6 |
 | `miles_requested` | INTEGER | **43** to **75** |  6 |
 
-For analysis of Fre/Paid Charging:
+For analysis of Free/Paid Charging:
 | Field Name | Data Type |Range | Number of records |
 | -------- | -------- | -------- |-------- |
 |`year`| YEAR| **2016** to **2021**|    7|
@@ -70,26 +70,26 @@ The grouping of the dataset reflecting the above data cleaning actions is as fol
 ``` sql
 WITH tidy_table1 AS 
   (
-    SELECT      station,
-/*Casting strings to DATETIME so we can perform simple calculations later
+    SELECT   	station,
+    		/*Casting strings to DATETIME so we can perform simple calculations later
 		when finding the average duration of charging time*/
                 CAST(start_charge AS DATETIME) start_charge,
                 CAST(termin_charge AS DATETIME) termin_charge
 
-    FROM `disco-order-yeah.nrel.charging_data`
-    WHERE start_charge != "NULL"
-          AND termin_charge != "NULL"
-          AND miles_requested IS NOT NULL
-			    AND miles_requested >= 0
+    FROM 	`disco-order-yeah.nrel.charging_data`
+    WHERE 	start_charge != "NULL"
+          	AND termin_charge != "NULL"
+          	AND miles_requested IS NOT NULL
+		AND miles_requested >= 0
   )
 
 SELECT  station,
-				#converting duration to hours
-				ROUND (
+	#converting duration to hours
+	ROUND (
                 AVG (
                       EXTRACT(HOUR FROM (termin_charge - start_charge)) * 3600 +
                       EXTRACT(MINUTE FROM (termin_charge - start_charge)) * 60 +
-                     EXTRACT(SECOND FROM (termin_charge - start_charge))
+                      EXTRACT(SECOND FROM (termin_charge - start_charge))
                      )/3600
               , 2) AS
          duration_hrs  
@@ -101,17 +101,16 @@ LIMIT    200
 
 - `miles_requested` by `station`
 ``` sql
-SELECT  station,
-        #rounding the values in miles_requested
-        CAST(ROUND(AVG(miles_requested), 0) AS INT64) AS miles_requested
-FROM `disco-order-yeah.nrel.charging_data`
-WHERE start_charge != "NULL"
-          AND termin_charge != "NULL"
-          AND miles_requested IS NOT NULL 
-			    AND miles_requested >= 0
-GROUP BY station 
-ORDER BY station 
-LIMIT 200
+SELECT  	station,
+        	CAST(ROUND(AVG(miles_requested), 0) AS INT64) AS miles_requested
+FROM 		`disco-order-yeah.nrel.charging_data`
+WHERE 		start_charge != "NULL"
+        	AND termin_charge != "NULL"
+        	AND miles_requested IS NOT NULL 
+		AND miles_requested >= 0
+GROUP BY 	station 
+ORDER BY 	station 
+LIMIT 		200
 ```
 
 - `max_charge_power` by `station`
@@ -129,17 +128,17 @@ LIMIT     200
 
 - `floor_level` by `station` 
 ```sql
-SELECT DISTINCT station,
-CASE
-  WHEN LEFT(station, 3) = 'LV1' THEN 'Level 1'
-  WHEN LEFT(station, 3) = 'LV2' THEN 'Level 2'
-  WHEN LEFT (station, 3) = 'LV3' THEN 'Level 3'
-  ELSE 'Ground Floor'
-  END AS floor_level
-FROM `disco-order-yeah.nrel.charging_data`
-WHERE station != "LV31-08" #this station has null for all `termin_charge` and `start_charge` fields
-ORDER BY station
-LIMIT 200
+SELECT 		DISTINCT station,
+		CASE
+		  WHEN LEFT(station, 3) = 'LV1' THEN 'Level 1'
+		  WHEN LEFT(station, 3) = 'LV2' THEN 'Level 2'
+		  WHEN LEFT (station, 3) = 'LV3' THEN 'Level 3'
+		  ELSE 'Ground Floor'
+		END AS floor_level
+FROM 		`disco-order-yeah.nrel.charging_data`
+WHERE 		station != "LV31-08" #this station has null for all `termin_charge` and `start_charge` fields
+ORDER BY 	station
+LIMIT 		200
 ```
 
 - `energy_charged` by `year` 
@@ -149,18 +148,18 @@ WITH tidy_table10 AS
     SELECT      CAST (energy_charged AS FLOAT64) energy_charged,
                 CAST(termin_charge AS DATETIME) termin_charge
 
-    FROM `disco-order-yeah.nrel.charging_data`
-    WHERE termin_charge != "NULL"
-          AND energy_charged IS NOT NULL
-					AND miles_requested IS NOT NULL
-          AND miles_requested >= 0
+    FROM 	`disco-order-yeah.nrel.charging_data`
+    WHERE 	termin_charge != "NULL"
+          	AND energy_charged IS NOT NULL
+		AND miles_requested IS NOT NULL
+   	    	AND miles_requested >= 0
   )
 
-SELECT  EXTRACT(YEAR FROM termin_charge) as year,
-        ROUND ((AVG (energy_charged)),0) as energy_charged
-FROM tidy_table10
-GROUP BY year
-ORDER BY year
+SELECT  	EXTRACT(YEAR FROM termin_charge) as year,
+        	ROUND ((AVG (energy_charged)),0) as energy_charged
+FROM 		tidy_table10
+GROUP BY 	year
+ORDER BY 	year
 ```
 
 - `miles_requested` by `year` 
@@ -170,16 +169,16 @@ WITH tidy_table10 AS
     SELECT      miles_requested,
                 CAST(termin_charge AS DATETIME) termin_charge
 
-    FROM `disco-order-yeah.nrel.charging_data`
-    WHERE start_charge != "NULL"
-          AND termin_charge != "NULL"
-          AND miles_requested IS NOT NULL 
-			    AND miles_requested >= 0 
+    FROM 	`disco-order-yeah.nrel.charging_data`
+    WHERE 	start_charge != "NULL"
+          	AND termin_charge != "NULL"
+          	AND miles_requested IS NOT NULL 
+		AND miles_requested >= 0 
   )
 
 SELECT  EXTRACT(YEAR FROM termin_charge) as year,
         ROUND (AVG (miles_requested), 0) as miles_requested
-FROM tidy_table10
+FROM	tidy_table10
 GROUP BY year
 ORDER BY year
 ```
@@ -194,15 +193,15 @@ WITH tidy_table10 AS
 
     FROM        `disco-order-yeah.nrel.charging_data`
     WHERE       termin_charge != "NULL"
-								AND start_charge != "NULL"
+		AND start_charge != "NULL"
                 AND miles_requested IS NOT NULL
-			          AND miles_requested >= 0
+		AND miles_requested >= 0
   )
 
 SELECT  afterPaid,
         EXTRACT (YEAR FROM termin_charge) as year,
         CAST ((ROUND ((AVG (miles_requested)),0)) AS INTEGER) as miles_requested,
-FROM tidy_table10
+FROM 	tidy_table10
 GROUP BY year, afterPaid
 ORDER BY year
 ```
@@ -215,17 +214,17 @@ WITH tidy_table10 AS
                 CAST (energy_charged AS FLOAT64) energy_charged,
                 CAST(termin_charge AS DATETIME) termin_charge
 
-    FROM `disco-order-yeah.nrel.charging_data`
-    WHERE start_charge != "NULL"
-          AND termin_charge != "NULL"
-          AND miles_requested IS NOT NULL 
-			    AND miles_requested >= 0 
+    FROM 	`disco-order-yeah.nrel.charging_data`
+    WHERE 	start_charge != "NULL"
+          	AND termin_charge != "NULL"
+          	AND miles_requested IS NOT NULL 
+		AND miles_requested >= 0 
   )
 
 SELECT  afterPaid,
         EXTRACT(YEAR FROM termin_charge) as year,
         ROUND (AVG (energy_charged), 0) as energy_charged
-FROM tidy_table10
+FROM 	tidy_table10
 GROUP BY year, afterPaid
 ORDER BY year
 ```
@@ -233,8 +232,8 @@ ORDER BY year
 After the above fields have been exported, and the following actions were taken using Excel:
 
 - Fields grouped by `station` are formed into [tidy_station.csv](https://github.com/MantissaMr/nrel_charging/blob/main/tidy_station.csv).
-- Fields grouped by `year` for pre/post COVID analysis into [covid_19.csv](https://github.com/MantissaMr/nrel_charging/blob/main/covid_19.csv).
-- Fields grouped by `year` for free/paid charging cost into [freePaid.csv](https://github.com/MantissaMr/nrel_charging/blob/main/freePaid.csv).
+- Fields grouped by `year` for pre/post COVID analysis are formed into [covid_19.csv](https://github.com/MantissaMr/nrel_charging/blob/main/covid_19.csv).
+- Fields grouped by `year` for free/paid charging cost are formed into [freePaid.csv](https://github.com/MantissaMr/nrel_charging/blob/main/freePaid.csv).
 
 ## Data Validation 
 The quality of our cleaned data was evaluated based on the following metrics:
