@@ -11,6 +11,7 @@ Neuman, Christopher, Andrew Meintz, and Myungsoo Jun. 2021. *Workplace Charging
 
 - **NREL** ← National Renewable Energy Laboratory
 - **EV** ← Electric Vehicles
+- **US** ← United States
 
 ## Objectives
 1. Analyze how the tracked EVs interacted with the charging stations at the NREL workspace to help NREL improve its employee EV charging experience.
