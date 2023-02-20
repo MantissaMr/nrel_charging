@@ -25,7 +25,7 @@ Neuman, Christopher, Andrew Meintz, and Myungsoo Jun. 2021. *Workplace Charging
 2. Does the avg. `miles_requested` increases or decreases with charging `duration_hrs` in the six stations of (1) above?
 3. What is the relation between the avg. `max_charge_power`to the avg. `duration_hrs` spent charging per floor?
 4. How does the avg. `miles_requested` and avg. `energy_charged` per year compare pre and post COVID-19 lockdown? 
-5. How does the avg. `miles_requested` differ when charging is free versus when it is paid?
+5. How does the avg. `miles_requested` and `energy_charged` differ when charging is free versus when it is paid?
 
 ## Roadmap
 - **Data Preparation:** Loading dataset to Big Query, drafting project roadmap, fleshing out SOW, etc.
