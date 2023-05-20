@@ -7,7 +7,8 @@ This [EV Charging data](https://github.com/MantissaMr/nrel_charging/blob/a560def
 **Please find the full overview of the data here:** 
 Neuman, Christopher, Andrew Meintz, and Myungsoo Jun. 2021. *Workplace Charging Data Collection and Behavior*. Golden, CO: National Renewable Energy Laboratory. NREL/TP-5400-77515 https://www.nrel.gov/docs/fy22osti/77515.pdf 
 
-Kaggle Notebook: https://www.kaggle.com/code/alameensanusii/nrel-s-workplace-ev-charging-behavior 
+## Kaggle Notebook
+https://www.kaggle.com/code/alameensanusii/nrel-s-workplace-ev-charging-behavior 
 
 ## Abbreviations 
 
